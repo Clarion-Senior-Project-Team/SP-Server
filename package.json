@@ -1,0 +1,29 @@
+{
+    "name": "sp-server",
+    "version": "1.0.0",
+    "description": "",
+    "homepage": "https://github.com/Clarion-Senior-Project-Team/SP-Server#readme",
+    "bugs": {
+        "url": "https://github.com/Clarion-Senior-Project-Team/SP-Server/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Clarion-Senior-Project-Team/SP-Server.git"
+    },
+    "license": "UNLICENSED",
+    "author": "Clarion Senior Project Team",
+    "type": "module",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "devstart": "node --watch server.js",
+        "start": "node server.js"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "dependencies": {
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1"
+    }
+}
