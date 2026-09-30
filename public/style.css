@@ -1,0 +1,111 @@
+/* Same palette as the SP-WebApp frontend, pulled from thevillagecares.org:
+   blue and red are the site's real CSS button/heading colors, gold is
+   sampled from the yellow handprint in their logo. Kept consistent here
+   so this page looks like it belongs to the same product, even though
+   it's rendered by the backend instead of React. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f5f7;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1e1e1e;
+}
+
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form-container {
+  width: 340px;
+  max-width: 90vw;
+  background: #ffffff;
+  border: 1px solid #e1e3e7;
+  border-radius: 14px;
+  padding: 28px 26px;
+}
+
+.brand {
+  text-align: center;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+h2 {
+  text-align: center;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #5a5f66;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #e1e3e7;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13.5px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  background: #184b9e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  font-family: "Inter", system-ui, sans-serif;
+  margin-top: 6px;
+}
+
+.error-banner {
+  background: #fbe4e2;
+  color: #ab241f;
+  border-radius: 8px;
+  padding: 9px 11px;
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+p {
+  text-align: center;
+  font-size: 12.5px;
+  margin-top: 16px;
+}
+
+p a {
+  color: #123b7a;
+  font-weight: 600;
+  text-decoration: none;
+}

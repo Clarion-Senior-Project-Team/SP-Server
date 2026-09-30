@@ -1,11 +1,25 @@
 import {pool} from './pool.js'; 
 
-export const findEmployee = async(email) => {
+export const findEmployee = async (email) => {
     const conn = await pool.connect();
     try {
         const { rows } = await conn.query(
         `SELECT id, name, email, user_level, password
-         FROM employees WHERE lower(email) = lower($1)`, [email]);
+         FROM employees WHERE lower(email) = lower($1)
+        `, [email]);
+        return rows[0] ?? null;
+    } finally {
+        conn.release();
+    }
+}
+
+export const findEmployeeById = async (userId) => {
+    const conn = await pool.connect();
+    try {
+        const { rows } = await conn.query(
+        `SELECT id, name, email, user_level, password
+         FROM employees WHERE id = $1
+        `, [userId]);
         return rows[0] ?? null;
     } finally {
         conn.release();
@@ -41,15 +55,16 @@ export async function createEmployee({
         return result.rows[0];
 
     } catch (error) {
-
         await conn.query("ROLLBACK");
 
-        //Tracks lowercase index violations
-        if (error.code == "23505") {
-            throw new Error("An employee with that email or username already exists");
+        if (error.code === "23505" && error.constraint === "idx_employees_email_lower") {
+            const e = new Error("Email already in use");
+            e.code = "EMAIL_TAKEN";
+            throw e;
         }
         throw error;
-    }   finally {
+
+    } finally {
         conn.release();
     }
 }
