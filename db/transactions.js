@@ -1,11 +1,25 @@
 import {pool} from './pool.js'; 
 
-export const findEmployee = async(email) => {
+export const findEmployee = async (email) => {
     const conn = await pool.connect();
     try {
         const { rows } = await conn.query(
         `SELECT id, name, email, user_level, password
-         FROM employees WHERE lower(email) = lower($1)`, [email]);
+         FROM employees WHERE lower(email) = lower($1)
+        `, [email]);
+        return rows[0] ?? null;
+    } finally {
+        conn.release();
+    }
+}
+
+export const findEmployeeById = async (userId) => {
+    const conn = await pool.connect();
+    try {
+        const { rows } = await conn.query(
+        `SELECT id, name, email, user_level, password
+         FROM employees WHERE id = $1
+        `, userId);
         return rows[0] ?? null;
     } finally {
         conn.release();

@@ -1,42 +1,34 @@
-import "dotenv/config";
+import { env } from "./config/env.js";
 import express from "express";
 import { initializeDatabase } from "./db/init.js";
+import helmet from "helmet";
 import cors from "cors";
-import bcrypt from "bcryptjs";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// import.meta.url is the ES-module replacement for CommonJS's __dirname
-// (which doesn't exist in "type": "module" projects like this one).
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 import authRoutes from "./auth/authentication/routes.js";
 import { sessionMiddleware } from "./config/session.js";
 
 const app = express();
-const PORT = process.env.PORT;
-const USERS_FILE = path.join(__dirname, "users.json");
-const SALT_ROUNDS = 10; // how much work bcrypt puts into hashing — higher is slower but harder to crack
+const PORT = env.port;
 
-app.use(cors()); // lets the frontend (a different port) call this API
+app.use(helmet());
+app.use(cors({ origin: env.clientOrigin, credentials: true }));
 app.use(express.json()); // parses incoming JSON request bodies into req.body
 app.use(sessionMiddleware);
-
 app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-// ---- dummy data we can use for now until database is created ----
-function loadUsers() {
-  if (!fs.existsSync(USERS_FILE)) return [];
-  return JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
-}
-function saveUsers(users) {
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
-}
+// After all routes
+app.use((req, res) => res.status(400).json({ error: "Not found."}));
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+    res.status(status).json({
+        error: status === 500 ? "Internal server error" : "Bad request.",
+    });
+})
 
 await initializeDatabase();
 
