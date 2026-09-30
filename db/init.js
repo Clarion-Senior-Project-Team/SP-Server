@@ -1,6 +1,5 @@
 import { pool } from "./pool.js"
-import { createtablees } from "./tables.js"
-
+import { createAllTables } from "./tables.js"
 
 export async function initializeDatabase() {
     try {
@@ -9,7 +8,7 @@ export async function initializeDatabase() {
         try {
             console.log("Connected to PostgreSQL");
 
-            await createTables(client);
+            await createAllTables(client);
 
             console.log("Database initialized successfully");
         } finally {
