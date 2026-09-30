@@ -1,4 +1,4 @@
-// Same fetch-based pattern as login.ejs — see the comment there.
+// Same fetch-based pattern as login.js — see the comment there.
 // /auth/signup logs the new account straight in on success (its
 // controller calls req.session.regenerate the same way login does),
 // so this also just redirects to "/" once it succeeds.

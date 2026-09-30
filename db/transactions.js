@@ -56,8 +56,15 @@ export async function createEmployee({
 
     } catch (error) {
         await conn.query("ROLLBACK");
+
+        if (error.code === "23505" && error.constraint === "idx_employees_email_lower") {
+            const e = new Error("Email already in use");
+            e.code = "EMAIL_TAKEN";
+            throw e;
+        }
         throw error;
-    }   finally {
+
+    } finally {
         conn.release();
     }
 }

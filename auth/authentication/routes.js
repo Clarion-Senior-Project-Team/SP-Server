@@ -4,7 +4,7 @@ import { login, signup, logout } from "./controller.js";
 import { requireAuth } from './middleware.js';
 
 const router = Router();
-const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 10, standardHeaders: "draft-7", legacyHeaders: false });
+const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 10, standardHeaders: "draft-7", legacyHeaders: false, skipSuccessfulRequests: true });
 
 // The actual login/signup screens — these just render the page. The
 // <form> on each one submits to the POST routes below via fetch(), which
