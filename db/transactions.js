@@ -19,7 +19,7 @@ export const findEmployeeById = async (userId) => {
         const { rows } = await conn.query(
         `SELECT id, name, email, user_level, password
          FROM employees WHERE id = $1
-        `, userId);
+        `, [userId]);
         return rows[0] ?? null;
     } finally {
         conn.release();
@@ -55,13 +55,7 @@ export async function createEmployee({
         return result.rows[0];
 
     } catch (error) {
-
         await conn.query("ROLLBACK");
-
-        //Tracks lowercase index violations
-        if (error.code == "23505") {
-            throw new Error("An employee with that email or username already exists");
-        }
         throw error;
     }   finally {
         conn.release();

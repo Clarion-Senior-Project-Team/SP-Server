@@ -7,7 +7,7 @@ export const PublicUser = (r) => ({ id: r.id, name: r.name, email: r.email, user
 
 export const loginUser = async (email, password) => {
     const row = await findEmployee(email);
-    const hash = user?.password ?? DUMMY_HASH;
+    const hash = row?.password ?? DUMMY_HASH;
     const ok = await matchPasswords(password, hash);
     return row && ok ? PublicUser(row) : null;
 };
