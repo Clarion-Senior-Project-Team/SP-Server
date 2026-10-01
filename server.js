@@ -46,7 +46,7 @@ app.get("/", async (req, res) => {
 });
 
 // After all routes
-app.use((req, res) => res.status(400).json({ error: "Not found."}));
+app.use((req, res) => res.status(404).json({ error: "Not found."}));
 
 app.use((err, req, res, next) => {
     console.error(err);
