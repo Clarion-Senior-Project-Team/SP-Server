@@ -23,7 +23,7 @@ export const findEmployeeById = async (userId) => {
 };
 
 // Transaction: Register Employee
-export async function createEmployeeTransaction({
+export async function createEmployee({
   first_name,
   last_name,
   dob,
@@ -96,7 +96,7 @@ export async function createEmployeeTransaction({
   }
 }
 
-export async function rolloverPayPeriodTransaction({
+export async function rolloverPayPeriod({
   new_period_start,
   new_period_end,
 }) {
@@ -245,7 +245,7 @@ export async function assignEmployeeToShift(shiftId, employeeId) {
   }
 }
 
-export async function clockInTransaction(employee_id, shift_id = null) {
+export async function clockIn(employee_id, shift_id = null) {
   const client = await pool.connect();
 
   try {
@@ -292,7 +292,7 @@ export async function clockInTransaction(employee_id, shift_id = null) {
   }
 }
 
-export async function clockOutTransaction(employee_id, break_minutes = 0) {
+export async function clockOut(employee_id, break_minutes = 0) {
   const client = await pool.connect();
 
   try {

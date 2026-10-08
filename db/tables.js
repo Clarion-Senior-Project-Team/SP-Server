@@ -2,7 +2,7 @@ const createEmployeeTable = async (conn) => {
   await conn.query(`
     -- Create type for user level
     DO $$ BEGIN
-      CREATE TYPE user_role AS ENUM ('employee', 'employer', 'admin');
+      CREATE TYPE user_role AS ENUM ('employee', 'employer', 'admin', 'developer');
     EXCEPTION
       WHEN duplicate_object THEN null;
     END $$;
