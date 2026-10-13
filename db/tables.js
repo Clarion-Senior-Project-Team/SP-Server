@@ -65,8 +65,12 @@ const createSchedulesTable = async (conn) => {
       title       VARCHAR(100) NOT NULL,
       start_date  DATE NOT NULL,
       end_date    DATE NOT NULL,
+      created_by  INTEGER REFERENCES employees(id) ON DELETE SET NULL, 
       created_at  TIMESTAMPTZ DEFAULT NOW()
     );
+
+    -- Fast lookup for schedules authored by a specific user
+    CREATE INDEX IF NOT EXISTS idx_schedules_created_by ON schedules(created_by);
   `);
 };
 
