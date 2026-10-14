@@ -8,6 +8,7 @@ import { PublicUser } from "./auth/authentication/service.js";
 import helmet from "helmet";
 import cors from "cors";
 import authRoutes from "./auth/authentication/routes.js";
+import apiRouter from "./api/index.js";
 import { sessionMiddleware } from "./config/session.js";
 
 // import.meta.url is the ES-module replacement for CommonJS's __dirname.
@@ -30,6 +31,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/api", apiRouter);
 app.use("/auth", authRoutes);
 
 // Same check middleware.js's requireAuth does — logged in shows the home

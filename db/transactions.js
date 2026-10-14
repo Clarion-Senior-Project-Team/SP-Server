@@ -4,6 +4,14 @@ import { pool } from "./pool.js";
 // EMPLOYEE OPERATIONS
 // ============================================================================
 
+export const getAllEmployees = async () => {
+    const { rows } = await pool.query(
+        `SELECT id, first_name, last_name, email, user_level, password, pto_balance, is_active
+         FROM employees`
+    );
+    return rows[0] ?? null;
+}
+
 export const findEmployee = async (email) => {
   const { rows } = await pool.query(
     `SELECT id, first_name, last_name, email, user_level, password, pto_balance, is_active
