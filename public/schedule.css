@@ -1,0 +1,273 @@
+/* Schedule page styles. Same palette as style.css (blue, red, and gold
+   pulled from thevillagecares.org). This page gets its own stylesheet
+   instead of adding to style.css, because style.css centers everything
+   in a small card, which is right for login but wrong for a wide grid. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap");
+
+:root {
+  --ink: #1e1e1e;
+  --ink-soft: #5a5f66;
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --line: #e1e3e7;
+  --blue: #184b9e;
+  --blue-dark: #123b7a;
+  --blue-tint: #e3eaf7;
+  --red: #ab241f;
+  --red-tint: #fbe4e2;
+  --gold-tint: #faf0d4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.schedule-body {
+  display: block;
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ---- Top bar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.topbar-brand {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+.topnav {
+  display: flex;
+  gap: 4px;
+}
+.topnav a {
+  padding: 7px 12px;
+  border-radius: 8px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.topnav a[aria-current="page"] {
+  background: var(--blue-tint);
+  color: var(--blue-dark);
+}
+.whoami {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.role {
+  text-transform: capitalize;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--blue-dark);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--blue-tint);
+}
+.btn:focus-visible,
+.topnav a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* ---- Page body ---- */
+.sched-main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 26px 24px 48px;
+}
+.sched-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sched-head h1 {
+  margin: 0 0 4px;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 26px;
+}
+.sched-range {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.week-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.notice {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--gold-tint);
+  color: #6b4d0b;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+.error-banner {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--red-tint);
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* ---- The grid ---- */
+.grid-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.sched-grid {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+.sched-grid th,
+.sched-grid td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.sched-grid thead th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: center;
+  white-space: nowrap;
+}
+.sched-grid thead th .day-num {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.sched-grid thead th:first-child,
+.sched-grid tbody th {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+  min-width: 150px;
+}
+.sched-grid tbody tr:last-child th,
+.sched-grid tbody tr:last-child td {
+  border-bottom: none;
+}
+.sched-grid .today {
+  background: var(--blue-tint);
+}
+.sched-grid thead th.today .day-num {
+  color: var(--blue-dark);
+}
+
+.person {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.person-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+.open-row .person {
+  color: var(--ink-soft);
+}
+
+.hours-cell {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* ---- A single shift ---- */
+.chip {
+  --c: #184b9e;
+  margin-bottom: 4px;
+  padding: 5px 8px;
+  border-left: 3px solid var(--c);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--c) 13%, white);
+  font-size: 12px;
+  line-height: 1.3;
+}
+.chip:last-child {
+  margin-bottom: 0;
+}
+.chip-time {
+  display: block;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.chip-role {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+.empty-cell {
+  color: #c4c7cd;
+  text-align: center;
+}
+
+.empty-message {
+  padding: 36px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 10px 16px;
+  }
+  .sched-main {
+    padding: 18px 16px 36px;
+  }
+}

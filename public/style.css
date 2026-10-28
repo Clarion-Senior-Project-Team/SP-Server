@@ -88,6 +88,14 @@ h2 {
   margin-top: 6px;
 }
 
+/* Same look as the button, for the one that's a link (home page's "View schedule"). */
+a.submit-btn {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+}
+
 .error-banner {
   background: #fbe4e2;
   color: #ab241f;

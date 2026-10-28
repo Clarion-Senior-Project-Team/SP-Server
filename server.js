@@ -47,6 +47,20 @@ app.get("/", async (req, res) => {
   res.render("home", { name: PublicUser(user).name });
 });
 
+// The schedule page. Same logged-in check as "/" above. This route only
+// draws the page; public/schedule.js loads the shifts from GET /api/schedules.
+// The name comes from first_name/last_name, since the employees table no
+// longer has a single name column.
+app.get("/schedule", async (req, res) => {
+  if (!req.session?.userId) return res.redirect("/auth/login");
+
+  const row = await findEmployeeById(req.session.userId);
+  if (!row) return req.session.destroy(() => res.redirect("/auth/login"));
+
+  const name = [row.first_name, row.last_name].filter(Boolean).join(" ") || row.name || row.email;
+  res.render("schedule", { name, userLevel: row.user_level });
+});
+
 // After all routes
 app.use((req, res) => res.status(404).json({ error: "Not found."}));
 

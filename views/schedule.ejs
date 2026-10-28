@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rutledge — Schedule</title>
+  <link rel="stylesheet" href="/schedule.css" />
+</head>
+<body class="schedule-body" data-user-level="<%= userLevel %>">
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-brand">Rutledge</span>
+      <nav class="topnav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/schedule" aria-current="page">Schedule</a>
+      </nav>
+    </div>
+    <div class="topbar-right">
+      <span class="whoami"><%= name %> &middot; <span class="role"><%= userLevel %></span></span>
+      <button id="logoutBtn" class="btn btn-ghost" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="sched-main">
+    <div class="sched-head">
+      <div>
+        <h1>Weekly schedule</h1>
+        <p class="sched-range" id="weekLabel" aria-live="polite"></p>
+      </div>
+      <div class="week-controls">
+        <button id="prevWeek" class="btn btn-ghost" type="button" aria-label="Previous week">&lsaquo; Prev</button>
+        <button id="thisWeek" class="btn btn-ghost" type="button">This week</button>
+        <button id="nextWeek" class="btn btn-ghost" type="button" aria-label="Next week">Next &rsaquo;</button>
+      </div>
+    </div>
+
+    <p id="sampleNotice" class="notice" role="status" hidden>
+      Showing sample shifts, not the real schedule. Remove ?sample=1 from the address to see the real one.
+    </p>
+    <p id="errorBanner" class="error-banner" role="alert" hidden></p>
+
+    <div class="grid-wrap">
+      <table class="sched-grid" id="grid"></table>
+    </div>
+  </main>
+
+  <script src="/schedule.js"></script>
+</body>
+</html>
