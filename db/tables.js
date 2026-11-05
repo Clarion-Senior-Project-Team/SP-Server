@@ -18,7 +18,7 @@ const createEmployeeTable = async (conn) => {
       password      VARCHAR(255) NOT NULL,
       user_level    user_role NOT NULL DEFAULT 'employee',
       pto_balance   NUMERIC(6, 2) NOT NULL DEFAULT 0.00,
-      is_active     BOLEAN NOT NULL DEFAULT TRUE,
+      is_active     BOOLEAN NOT NULL DEFAULT TRUE,
       CONSTRAINT chk_pto_non_negative CHECK (pto_balance >= 0)
     );
 
